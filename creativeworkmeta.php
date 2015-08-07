@@ -1,4 +1,26 @@
 <?php
+
+/**
+ * create a custom post type for creative works
+ **/
+
+add_action( 'init', 'create_creativework_type' );
+function create_creativework_type() {
+  register_post_type( 'creativework',
+    array(
+      'labels' => array(
+        'name' => __( 'Creative Works' ),
+        'singular_name' => __( 'Creative Work' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'rewrite' => array('slug' => 'creativework'),
+      'supports' => array('title', 'thumbnail', 'revisions' )
+    )
+  );
+}
+
+
 /**
  * Registering meta boxes for schema properties of a creative work
  *

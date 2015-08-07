@@ -1,4 +1,29 @@
 <?php
+
+/**
+ * create a custom post type for person
+ **
+ * hook it up to init so that it gets called good and early
+ *
+ * see https://codex.wordpress.org/Function_Reference/register_post_type
+ *
+ **/
+
+add_action( 'init', 'create_person_type' );
+function create_person_type() {
+  register_post_type( 'person',
+    array(
+      'labels' => array(
+        'name' => __( 'People' ),
+        'singular_name' => __( 'Person' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'rewrite' => array('slug' => 'person'),
+      'supports' => array('title', 'thumbnail', 'revisions' )
+    )
+  );
+}
 /**
  * Registering meta boxes for schema:Person properties
  *

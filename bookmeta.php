@@ -1,4 +1,31 @@
 <?php
+
+/**
+ * create a custom post type for books
+ *
+ * hook it up to init so that it gets called good and early
+ *
+ * see https://codex.wordpress.org/Function_Reference/register_post_type
+ *
+ **/
+
+add_action( 'init', 'create_book_type' );
+function create_book_type() {
+  register_post_type( 'book',
+    array(
+      'labels' => array(
+        'name' => __( 'Books' ),
+        'singular_name' => __( 'Book' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'rewrite' => array('slug' => 'book'),
+      'supports' => array('title', 'thumbnail', 'revisions' )
+    )
+  );
+}
+
+
 /**
  * Registering meta boxes for schema properties of a book
  *

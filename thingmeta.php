@@ -1,4 +1,30 @@
 <?php
+
+/**
+ * create a custom post type for things
+ **
+ * hook it up to init so that it gets called good and early
+ *
+ * see https://codex.wordpress.org/Function_Reference/register_post_type
+ *
+ **/
+
+add_action( 'init', 'create_thing_type' );
+function create_thing_type() {
+  register_post_type( 'thing',
+    array(
+      'labels' => array(
+        'name' => __( 'Things' ),
+        'singular_name' => __( 'Thing' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'rewrite' => array('slug' => 'thing'),
+      'supports' => array('title', 'thumbnail', 'revisions' )
+    )
+  );
+}
+
 /**
  * Registering meta boxes for schema properties of a schema.org thing
  *
