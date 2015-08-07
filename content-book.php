@@ -32,7 +32,7 @@
 	<?php semwp_print_book_numberOfPages(); ?>
 	<?php semwp_print_book_isbn(); ?>	
         <?php semwp_print_book_illustrator(); ?>
-        <?php semwp_print_creativework_datePublished(); ?>        
+        <?php semwp_print_creativework_datePublished(); ?>           
         <?php semwp_print_book_bookFormat(); ?>
         <?php semwp_print_creativework_sameAs(); ?>
     </div><!-- .entry-content -->

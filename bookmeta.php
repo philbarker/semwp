@@ -137,9 +137,15 @@ function semwp_print_book_bookEdition()
 }
 
 function semwp_print_book_bookFormat() {
-    if (get_term( 4, 'bookformat')) 
+    
+    if ( rwmb_meta( 'semwp_book_bookFormat' ) ) 
     { 
-        echo '<p>Format: <span property="bookFormat" >'.get_term( 4, 'bookformat')->name.'</span> (faked)</p>';
+        $term_IDs = explode (',', rwmb_meta( 'semwp_book_bookFormat' ));
+        echo '<p>Format:'; 
+        foreach ( $term_IDs as $term_ID ) {
+            echo ' <span property="bookFormat" >'.get_term( $term_ID, 'bookformat')->name.'</span>. ';
+        }
+        echo ' </p>';
     }
 }
 
