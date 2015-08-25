@@ -1,0 +1,43 @@
+<?php
+/*
+Plugin Name: SemWP
+Plugin URI: http://www.yourpluginurlhere.com/
+Version: 0.1
+Author: Phil Barker
+Description: SemWP, semantic wordpress plugin to add ability to edit semantic/linked data in wordpress and add API so for embedding data as RDFa if suitable theme is used (e.g. semwp theme)
+*/
+
+defined( 'ABSPATH' ) or die( 'No soup today!' );
+
+$semwpplugin_dir = plugin_dir_path( __FILE__ );
+
+include_once( $semwpplugin_dir.'inc/thingmeta.php' );
+include_once( $semwpplugin_dir.'inc/creativeworkmeta.php' );
+include_once( $semwpplugin_dir.'inc/bookmeta.php' );
+include_once( $semwpplugin_dir.'inc/personmeta.php' );
+
+function semwp_print_extract_rdf_links() {
+     echo '<p>Use <a href="http://rdf-translator.appspot.com/">RDFa translator</a> to:<br />';
+     $extract_rdf_n3_link = "http://rdf-translator.appspot.com/convert/rdfa/n3/html/".get_permalink();
+     $extract_rdf_xml_link = "http://rdf-translator.appspot.com/convert/rdfa/pretty-xml/html/".get_permalink();
+     $extract_rdf_jsonld_link = "http://rdf-translator.appspot.com/convert/rdfa/json-ld/html/".get_permalink();
+     echo '<a href="'.$extract_rdf_n3_link.'" target="_new"> Extract and display embedded sematic data from this post as N3</a><br />';		
+     echo '<a href="'.$extract_rdf_xml_link.'" target="_new"> Extract and display embedded sematic data from this post as RDF/XML</a><br />';		
+     echo '<a href="'.$extract_rdf_jsonld_link.'" target="_new"> Extract and display embedded sematic data from this post as JSON-LD</a>';		
+     echo '</p>';
+}
+
+
+function semwp_print_alink($id) {
+     if (get_the_title($id))       //it has a title, treat it as an object
+     {
+         echo sprintf('<a property="url" href="%s"><span property="name">%s</span></a>', esc_url(get_permalink($id)), get_the_title($id) );
+     }
+     else                          //treat it as a bare url string
+     {
+         echo sprintf('<a href="%s">%s</a>', esc_url($id), $id );
+     }
+}
+
+
+?>
