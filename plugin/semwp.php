@@ -4,10 +4,28 @@ Plugin Name: SemWP
 Plugin URI: http://www.yourpluginurlhere.com/
 Version: 0.1
 Author: Phil Barker
-Description: SemWP, semantic wordpress plugin to add ability to edit semantic/linked data in wordpress and add API so for embedding data as RDFa if suitable theme is used (e.g. semwp theme)
+Description: SemWP, semantic wordpress plugin to add ability to edit semantic/linked data in wordpress and add API so for embedding data as RDFa if suitable theme is used (e.g. semwp theme) Requires meta box plugin. 
 */
 
 defined( 'ABSPATH' ) or die( 'No soup today!' );
+
+/* check that meta-box plugin is installed */
+add_action( 'admin_init', 'child_plugin_has_parent_plugin' );
+function child_plugin_has_parent_plugin() {
+    if ( is_admin() && current_user_can( 'activate_plugins' ) &&  !is_plugin_active( 'meta-box/meta-box.php' ) ) {
+        add_action( 'admin_notices', 'child_plugin_notice' );
+
+        deactivate_plugins( plugin_basename( __FILE__ ) ); 
+
+        if ( isset( $_GET['activate'] ) ) {
+            unset( $_GET['activate'] );
+        }
+    }
+}
+
+function child_plugin_notice(){
+    ?><div class="error"><p>Sorry, but SemWP Plugin requires the <a href="https://metabox.io/">meta box plugin</a> to be installed and active.</p></div><?php
+}
 
 $semwpplugin_dir = plugin_dir_path( __FILE__ );
 
