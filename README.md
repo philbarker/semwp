@@ -1,4 +1,4 @@
-# semwp
+# Semantic WordPress
 Partial proof of concept that WordPress can be used for creating, 
 editing and disseminating semantic linked data, in this case using 
 the schema.org vocabulary.
