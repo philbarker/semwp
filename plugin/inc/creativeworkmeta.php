@@ -148,12 +148,12 @@ function semwp_register_creativework_meta_boxes( $meta_boxes )
 	return $meta_boxes;
 }
 
-function semwp_print_creativework_author() 
+function semwp_print_creativework_author(  ) 
 {
-    if ( rwmb_meta( 'semwp_creativework_authors' ) ) 
+    if ( implode ( '', rwmb_meta( 'semwp_creativework_authors', 'type = post' ) ) )
     {
 	echo '<p>By: ';
-	$authors = rwmb_meta( 'semwp_creativework_authors' );
+	$authors = rwmb_meta( 'semwp_creativework_authors', 'type = post' );
         foreach ( $authors as $author )
         {
                echo '<span property="author" typeof="Person">';
@@ -166,7 +166,7 @@ function semwp_print_creativework_author()
 
 function semwp_print_creativework_datePublished() 
 {
-    if (rwmb_meta( 'semwp_creativework_datepublished'))
+    if ( rwmb_meta( 'semwp_creativework_datepublished' ) )
     {
         echo'<p>Publication date: <span property="datePublished" datatype="xsd:date">';
         echo rwmb_meta( 'semwp_creativework_datepublished');
@@ -176,7 +176,7 @@ function semwp_print_creativework_datePublished()
 
 function semwp_print_creativework_sameAs()
 {
-    if (rwmb_meta( 'semwp_thing_sameAs' ) )
+    if ( implode('', rwmb_meta( 'semwp_thing_sameAs' ) ) ) 
     {
 
 	echo '<p>Also identified at:<br />';

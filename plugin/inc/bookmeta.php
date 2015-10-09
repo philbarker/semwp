@@ -190,7 +190,6 @@ function semwp_print_book_bookEdition()
 }
 
 function semwp_print_book_bookFormat() {
-    
     if ( rwmb_meta( 'semwp_book_bookFormat' ) ) 
     { 
         $term_IDs = explode (',', rwmb_meta( 'semwp_book_bookFormat' ));
@@ -206,11 +205,10 @@ function semwp_print_book_bookFormat() {
 }
 
 function semwp_print_book_illustrator() {
-    if (rwmb_meta( 'semwp_book_illustrator' )) 
+    if ( implode( '', rwmb_meta( 'semwp_book_illustrator' ) ) ) 
     {
 	echo '<p>Illustrated by: ';
-	 
-            $illustrators = rwmb_meta( 'semwp_book_illustrator' );
+            $illustrators = rwmb_meta( 'semwp_book_illustrator', 'type = post' );
             foreach ( $illustrators as $illustrator )
             {
                echo '<span property="illustrator" typeof="Person">';
