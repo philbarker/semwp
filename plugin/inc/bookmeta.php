@@ -25,6 +25,32 @@ function create_book_type() {
   );
 }
 
+add_action( 'init', 'create_book_format_taxonomy' );
+function create_book_format_taxonomy() {
+	$labels = array(
+		'name'			=> _x( 'Book formats', 'taxonomy general name' ),
+		'singular_name'	=> _x( 'Book format', 'taxonomy singular name' ),
+		'all_items'		=> __( 'All book formats' ),
+		'search_items'      => __( 'Search book formats' ),
+		'edit_item'         => __( 'Edit book format' ),
+		'update_item'       => __( 'Update book format' ),
+		'add_new_item'      => __( 'Add new book format' ),
+		'new_item_name'     => __( 'New book format name' ),
+		'menu_name'         => __( 'Book format' ),
+	);
+	$args = array(
+		'hierarchical'      => false,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => false,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'bookformats' ),
+	);
+	register_taxonomy( 'bookformat', array( 'book' ), $args );
+	wp_insert_term( 'EBook', 'bookformat', array() );
+	wp_insert_term( 'Hardcover', 'bookformat', array() );
+	wp_insert_term( 'Paperback', 'bookformat', array() );
+}
 
 /**
  * Registering meta boxes for schema properties of a book
@@ -93,7 +119,7 @@ function semwp_register_book_meta_boxes( $meta_boxes )
 				'type'  => 'text',
 				// Default value (optional)
 				'std'   => __( '', 'semwp_book_' ),
-			),
+			),			
 			// book format
 			// TAXONOMY
 			array(
@@ -170,7 +196,10 @@ function semwp_print_book_bookFormat() {
         $term_IDs = explode (',', rwmb_meta( 'semwp_book_bookFormat' ));
         echo '<p>Format:'; 
         foreach ( $term_IDs as $term_ID ) {
-            echo ' <span property="bookFormat" >'.get_term( $term_ID, 'bookformat')->name.'</span>. ';
+        	$term_name = get_term( $term_ID, 'bookformat')->name;
+        	echo '<span property="bookFormat" typeOf="http://schema.org/BookFormatType">';
+            echo ' <link property="Url" href="http://schema.org/'.$term_name.'"><span property="name">'.$term_name.'</span>';
+            echo '</span>.';
         }
         echo ' </p>';
     }
