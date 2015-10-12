@@ -88,14 +88,14 @@ function semwp_register_creativework_meta_boxes( $meta_boxes )
 				// CLONES: Add to make the field cloneable (i.e. have multiple value)
 				'clone' => true,
 			),
-                        // about
-                        // THING
+			// about
+			// THING
 			array(
 				'name'        => __( 'About (thing)', 'semwp_creativework_' ),
 				'id'          => "{$prefix}about",
 				'type'        => 'post',
 				// Post type
-				'post_type'   => 'thing',
+				'post_type'   => array( 'thing', 'creativework', 'book', 'person' ),
 				// Field type, either 'select' or 'select_advanced' (default)
 				'field_type'  => 'select_advanced',
 				'placeholder' => __( 'Select an Item', 'semwp_creativework_' ),
