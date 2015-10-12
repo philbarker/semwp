@@ -57,5 +57,10 @@ function semwp_print_alink($id) {
      }
 }
 
-
-?>
+function semwp_print_linked_items( $item_ids, $relationship, $item_type ) {
+	foreach ( $item_ids as $item_id ) {
+		echo '<span property="'.esc_attr( $relationship ).'" typeof="'.esc_attr( $item_type ).'">';
+		semwp_print_alink($item_id);
+		echo '</span>';
+	}  
+}

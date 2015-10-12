@@ -10,7 +10,8 @@
  **/
 
 add_action( 'init', 'create_person_type' );
-function create_person_type() {
+function create_person_type() 
+{
   register_post_type( 'person',
     array(
       'labels' => array(
@@ -164,4 +165,67 @@ function semwp_register_person_meta_boxes( $meta_boxes )
 		),
 	);
 	return $meta_boxes;
+}
+
+function semwp_print_person_dates(  )
+{
+    if ( rwmb_meta( 'semwp_person_birthDate' ) || rwmb_meta( 'semwp_person_deathDate' ) ) {
+        if (rwmb_meta( 'semwp_person_birthDate' )) {
+			echo '<p>Birth date: <span property="birthDate"  datatype="xsd:date" >'.rwmb_meta( 'semwp_person_birthDate' ).'</span>. ';
+		} else {
+			echo '<p>';
+		}
+		if (rwmb_meta( 'semwp_person_deathDate' )) {
+			echo 'Death date: <span property="deathDate"  datatype="xsd:date" >'.rwmb_meta( 'semwp_person_deathDate' ).'</span></p>';
+		} else {
+			echo '</p>';
+		}
+	}
+}
+
+function semwp_print_person_dates_compact(  )
+{
+    if (rwmb_meta( 'semwp_person_birthDate' ) || rwmb_meta( 'semwp_person_deathDate' )) {
+        if (rwmb_meta( 'semwp_person_birthDate' )) {
+			echo '(<span property="birthDate"  datatype="xsd:date" >'.rwmb_meta( 'semwp_person_birthDate' ).'</span> -';
+		} else {
+			echo '(? -';
+		}
+		if (rwmb_meta( 'semwp_person_deathDate' )) {
+			echo '<span property="deathDate"  datatype="xsd:date" >'.rwmb_meta( 'semwp_person_deathDate' ).'</span>)';
+		} else {
+			echo '?)';
+		}
+	}
+}
+
+function semwp_print_person_fullname( ) 
+{
+    if (rwmb_meta( 'semwp_person_familyName' ) || rwmb_meta( 'semwp_person_givenName')  || rwmb_meta( 'semwp_person_additionalName' )) {
+		if (rwmb_meta( 'semwp_person_familyName' )) {
+			echo '<p>Family Name: <span property ="familyName">'.rwmb_meta( 'semwp_person_familyName' ).'</span>, ';
+		} else {
+			echo '<p>';
+		}
+		if (rwmb_meta( 'semwp_person_givenName' )) {
+			echo 'Given Name: <span property ="givenName">'.rwmb_meta( 'semwp_person_givenName' ).'</span>, ';
+		} else {
+			echo ' ';
+		}
+		if (rwmb_meta( 'semwp_person_additionalName' )) {
+			echo 'Other Name(s): <span property ="additionalName">'.rwmb_meta( 'semwp_person_additionalName' ).'</span>.</p>';
+		} else {
+			echo '.</p>';
+		}
+	}
+}
+
+function semwp_print_person_colleague( ) 
+{
+	$colleagues = rwmb_meta( 'semwp_person_colleague', 'type = post' );
+    if ( implode( $colleagues ) ) {
+		echo '<p>Colleague(s): ';
+    	semwp_print_linked_items( $colleagues, 'colleague', 'Person' );
+		echo '</p>';
+	}
 }

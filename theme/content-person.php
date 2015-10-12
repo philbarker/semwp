@@ -10,7 +10,7 @@
 ?>
 
 
-<article resource="?<?php the_ID() ; ?>#id" id="?<?php the_ID(); ?>" <?php post_class(); ?> vocab="http://schema.org/" typeof="Book">
+<article resource="?<?php the_ID() ; ?>#id" id="?<?php the_ID(); ?>" <?php post_class(); ?> vocab="http://schema.org/" typeof="Person">
     <?php
 	// Post thumbnail.
 	twentyfifteen_post_thumbnail();
@@ -26,15 +26,11 @@
 	?>
     </header><!-- .entry-header -->
 
-    <div class="entry-content">
-    <?php semwp_print_creativework_author(  ); ?>
-	<?php semwp_print_book_bookEdition(); ?>
-	<?php semwp_print_book_numberOfPages(); ?>
-	<?php semwp_print_book_isbn(); ?>	
-        <?php semwp_print_book_illustrator(); ?>
-        <?php semwp_print_creativework_datePublished(); ?>           
-        <?php semwp_print_book_bookFormat(); ?>
-        <?php semwp_print_creativework_sameAs(); ?>
+	<div class="entry-content">
+	<?php semwp_print_person_fullname(  ); ?>
+	<?php semwp_print_person_dates(  ); ?>
+	<?php semwp_print_thing_description(  ); ?>
+	<?php semwp_print_person_colleague( ); ?>    
     </div><!-- .entry-content -->
 
     <footer class="entry-footer">
@@ -44,4 +40,3 @@
     </footer><!-- .entry-footer -->
 
 </article><!-- #post-## -->
-		

@@ -92,7 +92,7 @@ function semwp_register_thing_meta_boxes( $meta_boxes )
 				'clone' => true,
 			),
 			// description
-                        // TEXTAREA
+            // TEXTAREA
 			array(
 				'name' => __( 'description', 'semwp_thing_' ),
 				'desc' => __( 'A short description of the item.', 'semwp_thing_' ),
@@ -101,7 +101,7 @@ function semwp_register_thing_meta_boxes( $meta_boxes )
 				'cols' => 20,
 				'rows' => 3,
 			),
-                        // sameAs
+            // sameAs
 			// URL
 			array(
 				'name' => __( 'same as', 'semwp_thing_' ),
@@ -162,4 +162,12 @@ function semwp_register_thing_meta_boxes( $meta_boxes )
 		),
 	);
 	return $meta_boxes;
+}
+
+function semwp_print_thing_description()
+{
+    if (rwmb_meta( 'semwp_thing_description' ) ) 
+    {
+        echo '<div property="description" >'.rwmb_meta( 'semwp_thing_description' ).'</div>';
+    }
 }
