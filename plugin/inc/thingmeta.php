@@ -163,11 +163,3 @@ function semwp_register_thing_meta_boxes( $meta_boxes )
 	);
 	return $meta_boxes;
 }
-
-function semwp_print_thing_description()
-{
-    if (rwmb_meta( 'semwp_thing_description' ) ) 
-    {
-        echo '<div property="description" >'.rwmb_meta( 'semwp_thing_description' ).'</div>';
-    }
-}

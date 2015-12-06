@@ -33,6 +33,8 @@ include_once( $semwpplugin_dir.'inc/thingmeta.php' );
 include_once( $semwpplugin_dir.'inc/creativeworkmeta.php' );
 include_once( $semwpplugin_dir.'inc/bookmeta.php' );
 include_once( $semwpplugin_dir.'inc/personmeta.php' );
+include_once( $semwpplugin_dir.'inc/helperfunctions.php' );
+
 
 function semwp_print_extract_rdf_links() {
      echo '<p>Use <a href="http://rdf-translator.appspot.com/">RDFa translator</a> to:<br />';
